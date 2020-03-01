@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="sampleBatch"
+     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+     http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd"
+     version="1.0">
+    <listeners>
+        <listener ref="com.fun.listeners.CustomJobListener"/>
+    </listeners>
+    <step id="copyFiles" next="processFile">
+        <listeners>
+            <listener ref="com.fun.listeners.CustomStepListener"/>
+        </listeners>
+        <batchlet ref="com.fun.batchlet.FileCopier" />
+    </step>
+    <step id="processFile">
+        <listeners>
+            <listener ref="com.fun.listeners.CustomStepListener"/>
+            <listener ref="com.fun.listeners.ExceptionListener"/>
+        </listeners>
+        <chunk checkpoint-policy="item" item-count="2" skip-limit="3">
+            <skippable-exception-classes>
+                <include class="com.fun.misc.InvalidAccountException"/>
+            </skippable-exception-classes>
+            <reader ref="com.fun.itemreader.FileItemReader">
+                <properties>
+                    <property name="inputFilePath" value="input/inputFile.txt" />
+                    <property name="delimiter" value=","/>
+                    <property name="fieldNames" value="id, name, product, notes"/>
+                    <property name="fullyQualifiedTargetClass" value="com.fun.model.Account"/>
+                </properties>
+            </reader>
+            <processor ref="com.fun.itemprocessor.CustomItemProcessor" />
+            <writer ref="com.fun.itemwriter.FileItemWriter"/>
+        </chunk>
+    </step>
+
+</job>

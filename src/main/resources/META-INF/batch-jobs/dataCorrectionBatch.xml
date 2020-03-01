@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="dataCorrectionBatch"
+     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+     http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd"
+     version="1.0">
+    <listeners>
+        <listener ref="com.fun.listeners.CustomJobListener"/>
+    </listeners>
+
+    <step id="correctData">
+        <listeners>
+            <listener ref="com.fun.listeners.CustomStepListener"/>
+        </listeners>
+        <chunk checkpoint-policy="item" item-count="2">
+            <reader ref="com.fun.itemreader.JdbcReader">
+                <properties>
+                    <property name="sqlStatement" value="SELECT * FROM BATCH.dbo.ACCOUNT"/>
+                </properties>
+            </reader>
+            <processor ref="com.fun.itemprocessor.CorrectStatusTypoProcessor" />
+            <writer ref="com.fun.itemwriter.JdbcWriter">
+                <properties>
+                    <property name="sqlStatement" value="UPDATE BATCH.dbo.ACCOUNT SET STATUS= :status WHERE NAME= :name AND ID= :id"/>
+                </properties>
+            </writer>
+        </chunk>
+    </step>
+
+</job>
