@@ -33,7 +33,7 @@ public class Main {
             connection.setAutoCommit(true);
             preparedStatement = connection.prepareStatement(statement);
 
-            preparedStatement.setString(1, SAMPLE_JOB_NAME);
+            preparedStatement.setString(1, DATABASE_JOB_NAME);
             preparedStatement.setLong(2, executionId);
             preparedStatement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             preparedStatement.setString(4,"RUNNING");

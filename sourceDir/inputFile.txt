@@ -1,0 +1,10 @@
+1,John Doe,Platinum credit card,high roller - likes to go to vegas
+2,Rachel Sauce,Regular checking account,very angry on last call
+3,Billy Red,Special combined credit card,VIP customer
+4,Isabel Bella,Regular checking account,does not like being called izzy
+5,Rebecca Jones,VIP credit card,insider flag - is an Executive
+6,Jessica Carson,Student checking account,attends college
+7,Sam Kennison,Original checking account,customer since 1997
+8,Laura Peterson,Special combined credit card,pays on time
+9,Richard Dunham,Regular checking acount,prefers being called Rich
+10,Chloe Jackson,Platinum credit card,frequent traveler 

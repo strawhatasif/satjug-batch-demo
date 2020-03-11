@@ -19,9 +19,16 @@ public class FileCopier extends AbstractBatchlet {
         return BatchStatus.COMPLETED.toString();
     }
 
+    /**
+     * An elementary example showing file copy.
+     * For the sake of making this run locally, I've placed the file within another directory in this project
+     *
+     * In a real world scenario, the location could be another server.
+     * @throws IOException
+     */
     public static void copyFile() throws IOException {
-        Path source = Paths.get("C:/files/inputFile.txt");
-        Path target = Paths.get("C:/java-batch-demo/input/inputFile.txt");
+        Path source = Paths.get("C:/satjug-batch-demo/sourceDir/inputFile.txt");
+        Path target = Paths.get("C:/satjug-batch-demo/input/inputFile.txt");
 
         Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
     }
